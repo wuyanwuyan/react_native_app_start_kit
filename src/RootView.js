@@ -39,8 +39,10 @@ const Tab = TabNavigator(
                     android: {}
                 })
             },
-            labelStyle: {
-                paddingBottom: 2
+            labelStyle: Platform.OS === 'ios' ? {paddingBottom:2} : {
+                marginTop: 0,
+                marginBottom: 2,
+                fontSize: 10,
             },
             tabStyle: {
                 padding: 0
@@ -100,7 +102,13 @@ const App = StackNavigator(
             },
             headerTitleStyle: {
                 color: '#fff',
-                fontSize: 20
+                ...Platform.select({
+                    ios: null,
+                    android: {
+                        textAlign: 'center',
+                        alignSelf: 'center',
+                    }
+                }),
             },
             headerTintColor: '#fff'
         }

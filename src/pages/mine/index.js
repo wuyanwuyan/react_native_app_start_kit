@@ -1,6 +1,6 @@
-import React from 'react';
-import {View, Text,StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React from "react";
+import {Platform, StyleSheet, Text, View} from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 export default class Mine extends React.Component {
@@ -10,9 +10,13 @@ export default class Mine extends React.Component {
             tabBarIcon: ({tintColor}) => (
                 <Icon name="account" size={25} color={tintColor}/>
             ),
-            headerLeft: (<Icon.Button name="menu" size={30} backgroundColor="transparent" onPress={()=>{navigation.navigate('DrawerOpen')}}></Icon.Button>)
+            headerLeft: (<Icon.Button name="menu" size={30} backgroundColor="transparent" onPress={() => {
+                navigation.navigate('DrawerOpen')
+            }}></Icon.Button>),
+            headerRight: Platform.OS === 'ios' ? null : <View/>,
         }
     }
+
     constructor(props) {
         super(props);
 
@@ -28,9 +32,9 @@ export default class Mine extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center',
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })

@@ -10,7 +10,7 @@ export default class Splash extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            countDown: 3
+            countDown: 10
         }
         this.key = null;
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import {Text, View,StyleSheet} from "react-native";
+import {Text, View,StyleSheet,Platform} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default class Content extends React.Component {
@@ -11,7 +11,8 @@ export default class Content extends React.Component {
             ),
             headerLeft: (<Icon.Button name="menu" size={30} backgroundColor="transparent" onPress={() => {
                 navigation.navigate('DrawerOpen')
-            }}></Icon.Button>)
+            }}></Icon.Button>),
+            headerRight:Platform.OS === 'ios' ? null:<View/>,
         }
     }
 

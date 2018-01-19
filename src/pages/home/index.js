@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View,Platform} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 class Home extends React.Component {
@@ -12,7 +12,8 @@ class Home extends React.Component {
             ),
             headerLeft: (<Icon.Button name="menu" size={30} backgroundColor="transparent" onPress={() => {
                 navigation.navigate('DrawerOpen')
-            }}></Icon.Button>)
+            }}></Icon.Button>),
+            headerRight:Platform.OS === 'ios' ? null:<View/>,
         }
     }
 
