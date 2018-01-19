@@ -1,4 +1,4 @@
-一个React-Native app开发的脚手架，[github项目地址](https://github.com/wuyanwuyan/react_native_app_start_kit.git)。
+React-Native app开发的脚手架。
 
 ### 集成了以下模块：
 1. [react-navigation](https://github.com/react-navigation/react-navigation)
