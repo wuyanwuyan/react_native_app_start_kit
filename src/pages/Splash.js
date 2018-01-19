@@ -39,7 +39,7 @@ export default class Splash extends React.Component {
 
     render() {
         return (
-            <View style={null}>
+            <View style={styles.container}>
                 <Image source={require('../assets/logo.jpg')} style={styles.img}/>
                 <TouchableOpacity style={styles.pass} onPress={this.navigate2Main}>
                     <Text style={null}>{`跳过(${this.state.countDown}s)`}</Text>
@@ -51,10 +51,13 @@ export default class Splash extends React.Component {
 
 
 const styles = StyleSheet.create({
+    container:{
+      flex:1
+    },
     img: {
         maxWidth: '100%',
-        maxHeight: '90%',
-        resizeMode: 'contain',
+        maxHeight: '100%',
+        resizeMode: 'stretch',
     },
     pass: {
         position: 'absolute',

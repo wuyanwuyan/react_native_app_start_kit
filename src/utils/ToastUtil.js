@@ -20,6 +20,9 @@ const showShort = (content) => {
 };
 
 const showLong = (content) => {
+    if (!content) {
+        return;
+    }
     if (Platform.OS === 'ios') {
         Toast.show(content.toString(), {
             duration: Toast.durations.LONG,

@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import commomStyles from '../../styles/common';
+import {View, Text,StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 export default class Mine extends React.Component {
@@ -9,7 +8,7 @@ export default class Mine extends React.Component {
         return {
             title: '我的',
             tabBarIcon: ({tintColor}) => (
-                <Icon name="home" size={25} color={tintColor}/>
+                <Icon name="account" size={25} color={tintColor}/>
             ),
             headerLeft: (<Icon.Button name="menu" size={30} backgroundColor="transparent" onPress={()=>{navigation.navigate('DrawerOpen')}}></Icon.Button>)
         }
@@ -21,9 +20,17 @@ export default class Mine extends React.Component {
 
     render() {
         return (
-            <View>
-                <Text style={commomStyles.fontSizeNormal}>我的</Text>
+            <View style={styles.container}>
+                <Text>我的</Text>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center',
+    }
+})

@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
-import {BackHandler} from 'react-native';
-import {connect} from 'react-redux'
-import {StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers, NavigationActions} from 'react-navigation';
-import Splash from './pages/Splash';
-import Home from './pages/home';
-import Content from './pages/content';
-import Mine from './pages/mine';
-import WebViewPage from './pages/webView/index';
-import ToastUtil from './utils/ToastUtil';
+import React, {Component} from "react";
+import {BackHandler, Platform} from "react-native";
+import {connect} from "react-redux";
+import {addNavigationHelpers, DrawerNavigator, NavigationActions, StackNavigator, TabNavigator} from "react-navigation";
+import Splash from "./pages/Splash";
+import Home from "./pages/home";
+import Content from "./pages/content";
+import Mine from "./pages/mine";
+import WebViewPage from "./pages/webView/index";
+import ToastUtil from "./utils/ToastUtil";
 
-import DrawerContainer from './Containers/DrawerContainer'
+import DrawerContainer from "./Containers/DrawerContainer";
 
 const Tab = TabNavigator(
     {
@@ -33,14 +33,14 @@ const Tab = TabNavigator(
             inactiveTintColor: '#999999',
             showIcon: true,
             style: {
-                backgroundColor: '#fff'
+                backgroundColor: '#fff',
+                ...Platform.select({
+                    ios: {height: 46},
+                    android: {}
+                })
             },
-            labelStyle:{
-                marginTop:0,
-                marginBottom:2
-            },
-            indicatorStyle: {
-                opacity: 0
+            labelStyle: {
+                paddingBottom: 2
             },
             tabStyle: {
                 padding: 0

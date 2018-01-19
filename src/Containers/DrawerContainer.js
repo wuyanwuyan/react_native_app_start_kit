@@ -9,7 +9,7 @@ export default class DrawerContainer extends React.Component {
     return (
       <ScrollView>
         <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
-
+            <Text>Drawer</Text>
         </SafeAreaView>
       </ScrollView>
     )
@@ -19,6 +19,8 @@ export default class DrawerContainer extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent:'center',
+        alignItems:'center'
     },
 });
 
