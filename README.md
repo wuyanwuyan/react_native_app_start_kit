@@ -27,6 +27,7 @@ yarn install
 react-native run-ios
 ```
 **android**
+
  必须先启动一个安卓模拟器。之后：
 ```sh
 react-native run-android
