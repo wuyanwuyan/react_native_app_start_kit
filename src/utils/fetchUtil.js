@@ -16,12 +16,6 @@ export function fetchGet(url, query = {}, option = {}) {
             headers
         })
             .then((response) => {
-
-                // token过期 ，没权限
-                if (response.status === 401 || response.status === 403) {
-                    Profile.logout();
-                }
-
                 isOk = !!response.ok;
                 return response.json();
             })
