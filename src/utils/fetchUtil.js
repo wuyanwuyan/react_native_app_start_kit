@@ -4,15 +4,23 @@ import ToastUtil from "./ToastUtil";
 export function fetchGet(url, query = {}, option = {}) {
     let isOk;
     let serializeQuery = serialize(query);
-    let finalUrl = `${server.backend}${url}` + (serializeQuery ? `?${serializeQuery}` : '');
+
+    let queryStr = serializeQuery ? `?${serializeQuery}` : '';
+
+    let finalUrl = `${server.backend}${url}`;
+
+    if (/^http/.test(url)) finalUrl = url;
+
+    finalUrl += queryStr;
+
+    let headers = Object.assign({},option.headers);
+
+
     __DEV__ && console.log('%c start fetchGet:  ' + finalUrl, 'color: green');
-
-
-    let headers = {
-    };
 
     return new Promise((resolve, reject) => {
         fetch(finalUrl, {
+            method: 'GET',
             headers
         })
             .then((response) => {
@@ -21,6 +29,9 @@ export function fetchGet(url, query = {}, option = {}) {
             })
             .then((responseData) => {
                 if (isOk) {
+
+                    __DEV__ && console.log('%c end fetchGet:  ' , JSON.stringify(responseData) , 'color: green');
+
                     resolve(responseData);
                 } else {
                     reject(responseData);
@@ -47,6 +58,8 @@ export function fetchPost(url, data = {}, type = 'json') {
 
     let finalUrl = `${server.backend}${url}`;
 
+    if (/^http/.test(url)) finalUrl = url;
+
     __DEV__ && console.log('%c start fetchPost:  ' + finalUrl, ' data: ', data, 'color: green');
     return new Promise((resolve, reject) => {
         fetch(finalUrl, {
@@ -60,6 +73,9 @@ export function fetchPost(url, data = {}, type = 'json') {
             })
             .then((responseData) => {
                 if (isOk) {
+
+                    __DEV__ && console.log('%c end fetchPost:' ,  JSON.stringify(responseData) , 'color: green');
+
                     resolve(responseData);
                 } else {
                     reject(responseData);

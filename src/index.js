@@ -1,4 +1,3 @@
-import "es6-symbol/implement";
 import React from "react";
 import {Provider} from "react-redux";
 import RootView from "./RootView";
@@ -9,7 +8,7 @@ import rootSaga from "./sagas";
 let store = configureStore({});
 store.runSaga(rootSaga);
 
-export default Root = () => (
+export default () => (
     <Provider store={store}>
         <RootView/>
     </Provider>

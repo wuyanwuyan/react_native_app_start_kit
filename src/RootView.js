@@ -6,10 +6,15 @@ import Splash from "./pages/Splash";
 import Home from "./pages/home";
 import Content from "./pages/content";
 import Mine from "./pages/mine";
+import LoginRegister from "./pages/LoginRegister";
+import ExchangeDetail from "./pages/home/ExchangeDetail";
+import CoinDetail from "./pages/home/CoinDetail";
 import WebViewPage from "./pages/webView/index";
+import AboutThisApp from "./pages/mine/AboutThisApp";
+import MyInfo from "./pages/mine/MyInfo";
 import ToastUtil from "./utils/ToastUtil";
-
-import DrawerContainer from "./Containers/DrawerContainer";
+import getSlideFromRightTransition from "./utils/react-navigation-slide-from-right-transition";
+import WebViewFullScreen from "./pages/webView/WebViewFullScreen";
 
 const Tab = TabNavigator(
     {
@@ -39,7 +44,7 @@ const Tab = TabNavigator(
                     android: {}
                 })
             },
-            labelStyle: Platform.OS === 'ios' ? {paddingBottom:2} : {
+            labelStyle: Platform.OS === 'ios' ? {paddingBottom: 2} : {
                 marginTop: 0,
                 marginBottom: 2,
                 fontSize: 10,
@@ -51,57 +56,73 @@ const Tab = TabNavigator(
     });
 
 //再包裹一层StackNavigator，是因为需要StackNavigator的header，https://reactnavigation.org/docs/intro/headers
-const DrawHome = StackNavigator(
-    {
-        DrawHome: {
-            screen: Tab
-        }
-    },
-    {
-        navigationOptions: {
-            headerStyle: {
-                backgroundColor: '#3e9ce9'
-            },
-            headerTitleStyle: {
-                color: '#fff',
-                fontSize: 20
-            },
-            headerTintColor: '#fff'
-        }
-    }
-);
+// const DrawHome = StackNavigator(
+//     {
+//         DrawHome: {
+//             screen: Tab
+//         }
+//     },
+//     {
+//         navigationOptions: {
+//             headerStyle: {
+//                 backgroundColor: '#3e9ce9'
+//             },
+//             headerTitleStyle: {
+//                 color: '#fff',
+//                 fontSize: 20
+//             },
+//             headerTintColor: '#fff'
+//         }
+//     }
+// );
 
-const DrawerNav = DrawerNavigator({
-    DrawerNav: {
-        screen: DrawHome
-    }
-}, {
-    drawerWidth: 300,
-    contentComponent: (props) => <DrawerContainer {...props} />
-})
+// const DrawerNav = DrawerNavigator({
+//     DrawerNav: {
+//         screen: DrawHome
+//     }
+// }, {
+//     drawerWidth: 300,
+//     contentComponent: (props) => <DrawerContainer {...props} />
+// })
 
 
 const App = StackNavigator(
     {
         Splash: {screen: Splash},
         Home: {
-            screen: DrawerNav,
-            navigationOptions: { // 避免StackNavigator添加两个header，这里设置为空
-                header: null,
-            }
+            screen: Tab,
+        },
+        LoginRegister: {
+            screen: LoginRegister
+        },
+        ExchangeDetail: {
+            screen: ExchangeDetail
         },
         WebViewPage: {
             screen: WebViewPage
         },
+        WebViewFullScreen: {
+            screen: WebViewFullScreen
+
+        },
+        AboutThisApp: {
+            screen: AboutThisApp
+        },
+        MyInfo: {
+            screen: MyInfo
+        },
+        CoinDetail: {
+            screen: CoinDetail
+        }
     },
     {
         headerMode: 'screen',
         navigationOptions: {
             headerStyle: {
-                backgroundColor: '#3e9ce9'
+                backgroundColor: 'white'
             },
             headerTitleStyle: {
-                color: '#fff',
+                color: 'black',
                 ...Platform.select({
                     ios: null,
                     android: {
@@ -110,10 +131,13 @@ const App = StackNavigator(
                     }
                 }),
             },
-            headerTintColor: '#fff'
-        }
+            headerTintColor: 'black'
+        },
+        cardStyle: {
+            backgroundColor: '#fff',
+        },
+        transitionConfig: Platform.OS === 'ios' ? null : getSlideFromRightTransition
     });
-
 
 class AppWithRedux extends Component {
     constructor(props) {

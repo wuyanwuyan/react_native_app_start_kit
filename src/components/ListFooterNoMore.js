@@ -2,15 +2,20 @@ import React from 'react';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 
 export default class ListFooterNoMore extends React.Component {
+    static defaultProps = {
+        style: null
+    }
+
     constructor(props) {
         super(props);
 
     }
 
     render() {
+        const props = this.props;
         return (
-            <View style={styles.footerContainer}>
-                <Text style={styles.footerText}>已到底</Text>
+            <View style={[styles.footerContainer, props.style]}>
+                <Text style={styles.footerText}>没有更多的数据...</Text>
             </View>
         )
     }

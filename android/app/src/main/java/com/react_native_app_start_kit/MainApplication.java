@@ -3,6 +3,9 @@ package com.react_native_app_start_kit;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -24,6 +27,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeExceptionHandlerPackage(),
+            new RNDeviceInfo(),
+            new RNViewShotPackage(),
             new VectorIconsPackage()
       );
     }

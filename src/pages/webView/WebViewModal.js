@@ -7,10 +7,12 @@ import {
     Text,
     TouchableOpacity,
     View,
-    Clipboard, Alert
+    Clipboard,
+    Share
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal from 'react-native-modal';
+import ToastUtil from '../../utils/ToastUtil';
 
 
 export default class WebViewModal extends React.Component {
@@ -19,9 +21,19 @@ export default class WebViewModal extends React.Component {
 
     }
 
+    share = () => {
+        Share.share({
+            message: this.props.url,
+            url: this.props.url,
+            title: '币安网'
+        }).catch((error) => {
+            console.log(error)
+        });
+    }
+
     writeToClipboard = async () => {
         await Clipboard.setString(this.props.url);
-        __DEV__ && Alert.alert(await Clipboard.getString());
+        ToastUtil.showShort('已复制到剪切板');
     };
 
     render() {
@@ -31,10 +43,10 @@ export default class WebViewModal extends React.Component {
                     <View style={styles.itemsContainer}>
                         <View style={styles.itemContainer}>
                             <TouchableOpacity style={styles.iconContainer}
-                                              onPress={()=>{}}>
-                                <Icon name="wechat" size={30} color="green"/>
+                                              onPress={this.share}>
+                                <Icon name="share" size={30} color="green"/>
                             </TouchableOpacity>
-                            <Text style={styles.iconText}>分享到微信</Text>
+                            <Text style={styles.iconText}>分享</Text>
                         </View>
                         <View style={styles.itemContainer}>
                             <TouchableOpacity style={styles.iconContainer}
@@ -65,15 +77,15 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
     },
-    itemsContainer:{
-        width:'100%',
-        flexDirection:'row',
-        alignItems:'flex-start',
-        justifyContent:'flex-start',
+    itemsContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
     },
     itemContainer: {
         width: 60,
-        marginRight:20,
+        marginRight: 20,
     },
     iconContainer: {
         height: 60,
