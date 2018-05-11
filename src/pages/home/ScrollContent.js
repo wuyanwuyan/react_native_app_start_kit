@@ -64,17 +64,15 @@ export default class ScrollContent extends React.Component {
     _refresh = () => {
         this.setState({refreshing: true});
         this._fetchData(1);
-
     }
 
     _renderItem = ({item, index}) => {
-        let trendObj = trendFormat(parseFloat(item.percent_change_display));
-
+        let trendObj = trendFormat(item.percent_change_display);
         return <View style={styles.itemContainer}>
             <Text style={{
                 color: Dark_color,
                 fontSize: 12
-            }}>{`市值#${index + 1} $${unitConvert(item.market_cap_usd)},${item.alias}`}</Text>
+            }}>{`市值#${index + 1} $ ${unitConvert(item.market_cap_usd)},${item.alias}`}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center', paddingVertical: 6}}>
                 <Image source={{uri: item.logo}}
                        style={{width: 20, height: 20, resizeMode: 'stretch', marginRight: 2}}/>
@@ -89,8 +87,7 @@ export default class ScrollContent extends React.Component {
                     <Text style={{color: 'white'}}>{trendObj.txt}</Text>
                 </View>
             </View>
-            <Text style={{color: Dark_color, fontSize: 12}}>{`交易额 $${unitConvert(item.volume_24h_usd)}`}</Text>
-
+            <Text style={{color: Dark_color, fontSize: 12}}>{`交易额 $ ${unitConvert(item.volume_24h_usd)}`}</Text>
         </View>
     }
 
@@ -100,20 +97,18 @@ export default class ScrollContent extends React.Component {
 
         return (
             <View style={styles.container}>
-                {/*<FlatList*/}
-                    {/*style={{flex: 1}}*/}
-                    {/*data={state.listData}*/}
-                    {/*extraData={this.state}*/}
-                    {/*renderItem={this._renderItem}*/}
-                    {/*keyExtractor={(value, index) => value.id}*/}
-                    {/*refreshing={state.refreshing}*/}
-                    {/*onRefresh={this._refresh}*/}
-                    {/*onEndReached={this._loadMore}*/}
-                    {/*onEndReachedThreshold={0.0001}  // 有坑，这个数值*/}
-                    {/*ListFooterComponent={state.can_list_continue ? <ListFooterLoadMore/> : <ListFooterNoMore/>}*/}
-                {/*/>*/}
-
-                <Text>helllooooooo</Text>
+                <FlatList
+                    style={{flex: 1}}
+                    data={state.listData}
+                    extraData={this.state}
+                    renderItem={this._renderItem}
+                    keyExtractor={(value, index) => value.id}
+                    refreshing={state.refreshing}
+                    onRefresh={this._refresh}
+                    onEndReached={this._loadMore}
+                    onEndReachedThreshold={0.0001}  // 有坑，这个数值
+                    ListFooterComponent={state.can_list_continue ? <ListFooterLoadMore/> : <ListFooterNoMore/>}
+                />
             </View>
         )
     }

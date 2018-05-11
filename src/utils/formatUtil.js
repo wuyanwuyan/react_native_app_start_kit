@@ -1,34 +1,42 @@
 import {Dark_color} from '../config/constants';
 
-function strNumSize(tempNum) {
-    var stringNum = tempNum.toString();
-    var index = stringNum.indexOf(".");
-    var newNum = stringNum;
-    if (index != -1) {
-        newNum = stringNum.substring(0, index);
-    }
-    return newNum.length;
-}
-
 export function unitConvert(num, fix = 2) {
-    if (!num && num !== 0) return '';
 
-    if(typeof num === 'string') num = parseFloat(num);
 
-    var moneyUnits = ["", "万", "亿", "万亿"];
-    var dividend = 10000;
-    var curentNum = num;
-    //转换数字
+    function strNumSize(tempNum) {
+        let stringNum = tempNum.toString();
+        let index = stringNum.indexOf(".");
+        let newNum = stringNum;
+        if (index != -1) {
+            newNum = stringNum.substring(0, index);
+        }
+        return newNum.length;
+    }
+
+
+    if(!num) return '';
+
+    if (typeof num === 'string'){
+        num = parseFloat(num);
+    }
+
+    if(typeof num !== 'number') {
+        return num.toString();
+    }
+
+    let moneyUnits = ["", "万", "亿", "万亿"];
+    let dividend = 10000;
+    let curentNum = num;
+    // //转换数字
     var curentUnit = moneyUnits[0]; //转换单位
-    for (var i = 0; i < 4; i++) {
+    for (let i = 0; i < 4; i++) {
         curentUnit = moneyUnits[i];
         if (strNumSize(curentNum) < 5) {
             break;
         }
         curentNum = curentNum / dividend;
     }
-
-    return Number(curentNum).toFixed(fix) + curentUnit;
+    return curentNum.toFixed(fix) + curentUnit;
 }
 
 //  趋势数字 格式化
@@ -41,7 +49,9 @@ const TrendColor = {
 
 export function trendFormat(price_change_percent) {
 
-    if(!price_change_percent || !price_change_percent.toFixed){
+    if (typeof price_change_percent === 'string') price_change_percent = parseFloat(price_change_percent);
+
+    if (!price_change_percent || !price_change_percent.toFixed) {
         price_change_percent = 0;
     }
 

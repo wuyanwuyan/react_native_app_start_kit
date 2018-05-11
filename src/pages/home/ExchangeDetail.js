@@ -78,8 +78,7 @@ class ExchangeDetail extends React.Component {
                             navigation={this.props.navigation}
                             market_id={market_id}
                             tabLabel={v.title}
-                            key={v.title}>
-                        </ScrollContent2>
+                            key={v.title} />
                     )
                 }
             </ScrollableTabView>
