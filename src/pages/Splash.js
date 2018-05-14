@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, StyleSheet, Text, TouchableOpacity,ImageBackground,Platform} from 'react-native';
+import {View, Image, StyleSheet, Text, TouchableOpacity, ImageBackground, Platform} from 'react-native';
 import NavigationUtil from '../utils/NavigationUtil';
 import {fetchGet} from "../utils/fetchUtil";
 import WebViewFullScreen from "./webView/WebViewFullScreen";
@@ -15,19 +15,25 @@ export default class Splash extends React.Component {
         super(props);
         this.state = {
             countDown: 2,
-            fetched:false,
+            fetched: false,
         }
         this.key = null;
     }
 
     componentDidMount() {
-        fetchGet('/api/ly/currency/switch',{os:Platform.OS,version:DeviceInfo.getVersion()}).then(data=>{
-            this.setState({fetched:true});
-            if(data.code !== 200) return;
+        fetchGet('/api/ly/currency/switch', {
+            os: Platform.OS,
+            version: DeviceInfo.getVersion(),
+            bundle: DeviceInfo.getBundleId(),
+            deviceId: DeviceInfo.getDeviceId(),
+            deviceName: DeviceInfo.getDeviceName(),
+        }).then(data => {
+            this.setState({fetched: true});
+            if (data.code !== 200) return;
             // 切换
 
-            if(data.data.is_show){
-                NavigationUtil.reset(this.props.navigation,'WebViewFullScreen',{url:data.data.ad_url});
+            if (data.data.is_show) {
+                NavigationUtil.reset(this.props.navigation, 'WebViewFullScreen', {url: data.data.ad_url});
             }
 
             this.key = setInterval(() => {
@@ -41,8 +47,8 @@ export default class Splash extends React.Component {
                 }
             }, 1000);
 
-        }).catch(()=>{
-            this.setState({fetched:true});
+        }).catch(() => {
+            this.setState({fetched: true});
         })
     }
 
@@ -51,7 +57,7 @@ export default class Splash extends React.Component {
     }
 
     navigate2Main = () => {
-        if(!this.state.fetched) return;
+        if (!this.state.fetched) return;
         NavigationUtil.reset(this.props.navigation, 'Home');
     }
 
@@ -59,10 +65,11 @@ export default class Splash extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.img}>
-                    <Image style={{width:100,height:100,resizeMode:'stretch'}} source={require('../assets/logo.png')}/>
+                    <Image style={{width: 100, height: 100, resizeMode: 'stretch'}}
+                           source={require('../assets/logo.png')}/>
                 </View>
                 <TouchableOpacity style={styles.pass} onPress={this.navigate2Main}>
-                    <Text style={{fontSize:16}}>{`跳过(${this.state.countDown}s)`}</Text>
+                    <Text style={{fontSize: 16}}>{`跳过(${this.state.countDown}s)`}</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -70,15 +77,15 @@ export default class Splash extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container:{
-      flex:1
+    container: {
+        flex: 1
     },
     img: {
         width: '100%',
         height: '100%',
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
     },
     pass: {
         position: 'absolute',
@@ -88,14 +95,14 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         padding: 8
     },
-    descTextContainer:{
-        justifyContent:'flex-end',
-        alignItems:'center'
+    descTextContainer: {
+        justifyContent: 'flex-end',
+        alignItems: 'center'
     },
-    descText:{
-        paddingBottom:30,
-        fontSize:12,
-        color:'white',
+    descText: {
+        paddingBottom: 30,
+        fontSize: 12,
+        color: 'white',
     }
 
 });
