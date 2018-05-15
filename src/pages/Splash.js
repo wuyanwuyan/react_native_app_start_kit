@@ -26,7 +26,7 @@ export default class Splash extends React.Component {
             source_app_version: DeviceInfo.getVersion(), // v1.0
             source_app: DeviceInfo.getBundleId(),  // 安卓包名
             os_version: DeviceInfo.getSystemVersion(), // iOS 9.2
-            channel: 'huawei'
+            channel: 'xiaomi'
         }).then(data => {
             this.setState({fetched: true});
             if (data.code !== 200) return;
