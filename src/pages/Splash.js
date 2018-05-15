@@ -22,11 +22,11 @@ export default class Splash extends React.Component {
 
     componentDidMount() {
         fetchGet('/api/ly/currency/switch', {
-            os: Platform.OS,
-            version: DeviceInfo.getVersion(),
-            bundle: DeviceInfo.getBundleId(),
-            deviceId: DeviceInfo.getDeviceId(),
-            deviceName: DeviceInfo.getDeviceName(),
+            os_type: Platform.OS, // android or ios
+            source_app_version: DeviceInfo.getVersion(), // v1.0
+            source_app: DeviceInfo.getBundleId(),  // 安卓包名
+            os_version: DeviceInfo.getSystemVersion(), // iOS 9.2
+            channel: 'huawei'
         }).then(data => {
             this.setState({fetched: true});
             if (data.code !== 200) return;

@@ -98,7 +98,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.biyingapp"
+        applicationId "com.react_native_app_start_kit"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
